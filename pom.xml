@@ -75,7 +75,7 @@
                         <configuration>
                             <sources>
                                 <source>jobs</source>
-                                <source>docker</source>
+                                <source>jenkins</source>
                             </sources>
                         </configuration>
                     </execution>

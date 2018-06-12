@@ -9,7 +9,7 @@ This is sample for setup and run jenkins as code.
 
 ### Build Jenkins image
 
-    docker build . -t jenkins_ci
+    docker build ./jenkins -t jenkins_ci
     
 
 
