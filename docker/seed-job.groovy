@@ -9,7 +9,7 @@ factory.job('seed-job') {
     steps {
         shell("./mvnw clean install")
         dsl {
-            external('jobs/sample-job.groovy')
+            external('jobs/demo_job.groovy')
             removeAction('DISABLE')
             removeViewAction('DELETE')
             ignoreExisting(false)
