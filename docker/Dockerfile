@@ -21,4 +21,4 @@ RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 # Automatic job setup
 COPY init.groovy /usr/share/jenkins/ref/init.groovy
-COPY seed-job.groovy /usr/share/jenkins/seed_job.groovy
+COPY seed-job.groovy /usr/share/jenkins/seed-job.groovy
