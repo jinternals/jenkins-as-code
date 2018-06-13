@@ -2,7 +2,7 @@
 This is sample for setup and run jenkins as code.
 
     .
-    ├── docker                  # Jenkins automation with seed job setup
+    ├── jenkins                  # Jenkins automation with seed job setup
     ├── jobs                    # Jenkins jobs as a code, using jobs-dsl
     ├── src/test/java           # Test cases for jobs
     └── README.md
