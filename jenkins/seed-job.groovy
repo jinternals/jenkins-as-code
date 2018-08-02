@@ -7,8 +7,13 @@ factory.job('seed-job') {
     triggers { githubPush() }
     scm { github("jinternals/jenkins-as-code") }
     wrappers { colorizeOutput() }
+
     steps {
-        shell("mvn clean install")
+        maven{
+            mavenInstallation('maven3')
+            goals("clean install")
+        }
+
         dsl {
             external('jobs/spring_cloud_stream.groovy')
             removeAction('DISABLE')

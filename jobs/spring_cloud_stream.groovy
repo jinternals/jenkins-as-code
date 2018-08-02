@@ -15,7 +15,7 @@ factory.job("spring-cloud-stream-build") {
     // Additional wrappers
     wrappers { colorizeOutput() }
     // Steps to be executed
-    steps { shell("mvn clean install") }
+    steps {   maven("clean install") }
     // What should happen after completion of steps
     publishers {
         // let's check out tests
