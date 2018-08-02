@@ -10,7 +10,7 @@ import static java.nio.file.Files.readAllBytes;
 
 public class SampleJobTest {
 
-    public static final Path PATH = new File("jobs/demo_job.groovy").toPath();
+    public static final Path PATH = new File("jobs/spring_cloud_stream.groovyream.groovy").toPath();
 
     @Test
     public void shouldCompileScript() throws IOException {

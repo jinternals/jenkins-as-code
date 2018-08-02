@@ -8,9 +8,9 @@ factory.job('seed-job') {
     scm { github("jinternals/jenkins-as-code") }
     wrappers { colorizeOutput() }
     steps {
-        shell("./mvnw clean install")
+        shell("mvn clean install")
         dsl {
-            external('jobs/demo_job.groovy')
+            external('jobs/spring_cloud_stream.groovy')
             removeAction('DISABLE')
             removeViewAction('DELETE')
             ignoreExisting(false)
