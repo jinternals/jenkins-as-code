@@ -5,13 +5,13 @@ import javaposse.jobdsl.dsl.DslFactory
 DslFactory factory = this
 
 // The simplest job is the FreestyleJob
-factory.job("simple-maven-boot-build") {
+factory.job("spring-cloud-stream-build") {
     // Required by the Delivery Pipeline view
     deliveryPipelineConfiguration("Build")
     // Trigger when a push to github was made
     triggers { githubPush() }
     // SCM configuration
-    scm { github("applied-continuous-delivery-livelessons/simple-maven-boot") }
+    scm { github("jinternals/spring-cloud-stream") }
     // Additional wrappers
     wrappers { colorizeOutput() }
     // Steps to be executed
@@ -24,23 +24,24 @@ factory.job("simple-maven-boot-build") {
         // automatic step
         // for manual use buildPipelineTrigger
         downstreamParameterized {
-            trigger("simple-maven-boot-deploy") { triggerWithNoParameters() }
+            trigger("spring-cloud-stream-deploy") { triggerWithNoParameters() }
         }
     }
 }
 
-factory.job("simple-maven-boot-deploy") {
+factory.job("spring-cloud-stream-deploy") {
     // Required by the Delivery Pipeline view
     deliveryPipelineConfiguration("Deploy")
     // SCM configuration
-    scm { github("applied-continuous-delivery-livelessons/simple-maven-boot") }
+    scm { github("jinternals/spring-cloud-stream") }
     // Steps to be executed
     steps { shell("echo 'Deploying artifact'") }
 }
 
-factory.deliveryPipelineView("simple-maven-boot-pipeline") {
+
+factory.deliveryPipelineView("spring-cloud-stream-pipeline") {
     pipelines {
-        component("Deployment", "simple-maven-boot-build")
+        component("Deployment", "spring-cloud-stream-build")
     }
     allowPipelineStart()
     showChangeLog()
