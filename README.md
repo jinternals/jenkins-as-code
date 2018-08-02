@@ -1,4 +1,8 @@
+
 # jenkins-as-code
+
+[![Build Status](https://travis-ci.org/jinternals/jenkins-as-code.svg?branch=master)](https://travis-ci.org/jinternals/jenkins-as-code)
+
 This is sample for setup and run jenkins as code.
 
     .
