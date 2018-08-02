@@ -15,7 +15,12 @@ factory.job("spring-cloud-stream-build") {
     // Additional wrappers
     wrappers { colorizeOutput() }
     // Steps to be executed
-    steps {   maven("clean install") }
+    steps {
+        maven{
+            mavenInstallation('maven3')
+            goals("clean install")
+        }
+    }
     // What should happen after completion of steps
     publishers {
         // let's check out tests
