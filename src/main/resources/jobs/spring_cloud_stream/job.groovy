@@ -1,5 +1,3 @@
-package jobs.spring_cloud_stream
-
 import javaposse.jobdsl.dsl.DslFactory
 
 // delegate of the script, if you want code completion just set it to a variable
