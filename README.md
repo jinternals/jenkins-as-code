@@ -23,6 +23,11 @@ This is sample for setup and run jenkins as code.
 ```
     docker-compose -f docker-compose.yml up -d
 ```
+##### stop containers :
+
+ ```
+    docker-compose -f docker-compose.yml stop
+```
 
  ##### remove containers :
   
