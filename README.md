@@ -18,27 +18,14 @@ This is sample for setup and run jenkins as code.
     mvn clean install docker:build 
 ```
 
-#### how to run kafka example:
-
-
 ##### start containers :
 
 ```
     docker-compose -f docker-compose.yml up -d
 ```
 
-
-### Build Jenkins image
-
-    docker build ./jenkins -t jenkins_ci
-    
-
-### Run Jenkins container
-
-    docker run --name jenkins_ci_container -p 8080:8080 -p 50000:50000 jenkins_ci
-
-### Remove Jenkins container and image
-
-    docker rm jenkins_ci_container
-    docker rmi jenkins_ci
-    
+ ##### remove containers :
+  
+```
+    docker-compose -f docker-compose.yml rm -f   
+```
