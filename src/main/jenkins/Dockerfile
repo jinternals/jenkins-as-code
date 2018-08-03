@@ -18,7 +18,7 @@ COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 
-COPY downloads/* /var/jenkins_home/downloads/
+#COPY ../../../data/jenkins_home/downloads /var/jenkins_home/downloads/
 COPY setup-scripts/* /usr/share/jenkins/ref/init.groovy.d/
 
 COPY seed-job.groovy /usr/share/jenkins/seed-job.groovy
