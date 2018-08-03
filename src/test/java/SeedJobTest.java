@@ -11,7 +11,7 @@ import static java.nio.file.Files.readAllBytes;
 public class SeedJobTest {
 
 
-    public static final Path PATH = new File("jenkins/seed-job.groovy").toPath();
+    public static final Path PATH = new File("src/main/jenkins/seed-job.groovy").toPath();
 
     @Test
     public void shouldCompileScript() throws IOException {

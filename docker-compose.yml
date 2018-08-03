@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jinternals/jenkins
+    container_name: jenkins
+    hostname: jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./data/jenkins_home/:/var/jenkins_home
+    networks:
+      jenkins-network:
+        ipv4_address: 10.8.0.2
+
+networks:
+  jenkins-network:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 10.8.0.0/16

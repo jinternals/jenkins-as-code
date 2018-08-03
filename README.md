@@ -11,6 +11,23 @@ This is sample for setup and run jenkins as code.
     ├── src/test/java           # Test cases for jobs
     └── README.md
 
+
+
+##### build code and docker images :
+```
+    mvn clean install docker:build 
+```
+
+#### how to run kafka example:
+
+
+##### start containers :
+
+```
+    docker-compose -f docker-compose.yml up -d
+```
+
+
 ### Build Jenkins image
 
     docker build ./jenkins -t jenkins_ci

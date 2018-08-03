@@ -15,10 +15,15 @@
 
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <job.dsl.version>1.66</job.dsl.version>
         <credentials.version>2.1.16</credentials.version>
         <groovy.version>2.0</groovy.version>
         <jenkins.core.version>2.85</jenkins.core.version>
+        <docker.image.prefix>jinternals</docker.image.prefix>
+        <plugin.docker.version>0.4.13</plugin.docker.version>
     </properties>
 
     <dependencies>
@@ -66,6 +71,16 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/jenkins</directory>
+                <targetPath>${project.build.directory}/docker-resources</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -104,6 +119,21 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${plugin.docker.version}</version>
+                <configuration>
+                    <skipDockerBuild>false</skipDockerBuild>
+                    <skipDockerPush>false</skipDockerPush>
+                    <forceTags>true</forceTags>
+                    <imageTags>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <imageName>${docker.image.prefix}/jenkins</imageName>
+                    <dockerDirectory>${project.build.directory}/docker-resources</dockerDirectory>
                 </configuration>
             </plugin>
         </plugins>
