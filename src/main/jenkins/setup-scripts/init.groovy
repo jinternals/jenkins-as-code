@@ -21,12 +21,6 @@ JobManagement jobManagement = new JenkinsJobManagement(System.out, [:], new File
 
 new DslScriptLoader(jobManagement).with { runScript(jobScript.text) }
 
-println("Adding credentials")
-SystemCredentialsProvider.getInstance().getCredentials().add(
-        new UsernamePasswordCredentialsImpl(CredentialsScope.GLOBAL,
-                "my_id", "my description", "user", "pass"))
-SystemCredentialsProvider.getInstance().save()
-
 
 println("Marking allow macro token")
 Groovy.DescriptorImpl descriptor =

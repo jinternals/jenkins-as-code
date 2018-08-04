@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   jenkins:
@@ -6,13 +6,19 @@ services:
     container_name: jenkins
     hostname: jenkins
     ports:
-      - 8080:8080
+      - 8082:8080
       - 50000:50000
     volumes:
       - ./data/jenkins_home/:/var/jenkins_home
+    secrets:
+      - artifactoryPassword
     networks:
       jenkins-network:
         ipv4_address: 10.8.0.2
+
+secrets:
+  artifactoryPassword:
+    file: ./config/jenkins/artifactoryPassword
 
 networks:
   jenkins-network:
