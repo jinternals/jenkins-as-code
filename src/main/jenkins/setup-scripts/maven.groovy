@@ -7,18 +7,21 @@ import hudson.tools.ZipExtractionInstaller;
 import hudson.util.DescribableList
 import jenkins.model.Jenkins;
 
-def mavenExtension = Jenkins.instance.getExtensionList(Maven.DescriptorImpl.class)[0]
+def extensions = Jenkins.instance.getExtensionList(Maven.DescriptorImpl.class)[0]
 
-List<MavenInstallation> mavenInstallations = []
+List<MavenInstallation> installations = []
 
-mavenTool = ['name': 'maven3', 'url': 'file:/var/jenkins_home/downloads/apache-maven-3.5.4-bin.tar.gz', 'subdir': 'apache-maven-3.5.4', 'label': 'apache-maven-3.5.4']
+mavenTool = ['name': 'maven3', 'url': 'file:/var/jenkins_home/downloads/apache-maven-3.5.4-bin.tar.gz', 'subdir': 'apache-maven-3.5.4']
+
+println("Setting up tool: ${mavenTool.name} ")
 
 def describableList = new DescribableList<ToolProperty<?>, ToolPropertyDescriptor>()
-def mavenInstaller = new ZipExtractionInstaller(mavenTool.label as String, mavenTool.url as String, mavenTool.subdir as String);
-describableList.add(new InstallSourceProperty([mavenInstaller]))
+def installer = new ZipExtractionInstaller(mavenTool.label as String, mavenTool.url as String, mavenTool.subdir as String);
 
-mavenInstallations.add(new MavenInstallation(mavenTool.name as String, "", describableList))
+describableList.add(new InstallSourceProperty([installer]))
 
-mavenExtension.setInstallations(mavenInstallations.toArray(new MavenInstallation[mavenInstallations.size()]))
+installations.add(new MavenInstallation(mavenTool.name as String, "", describableList))
 
-mavenExtension.save()
+extensions.setInstallations(installations.toArray(new MavenInstallation[installations.size()]))
+
+extensions.save()
