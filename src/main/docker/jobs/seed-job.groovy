@@ -15,4 +15,5 @@ job("seed-job") {
     steps {
         shell('jenkins-jobs update --delete-old -r ./configuration')
     }
+
 }
