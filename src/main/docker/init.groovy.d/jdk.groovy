@@ -2,14 +2,13 @@ import hudson.model.JDK
 import hudson.tools.InstallSourceProperty
 import hudson.tools.ZipExtractionInstaller
 
+javaTools=[
+        ['name':'jdk8', 'url':'file:/var/tools/jdk-8u181-linux-x64.tar.gz', 'subdir':'jdk1.8.0_181']
+]
+
 def descriptor = new JDK.DescriptorImpl();
 
-
 def List<JDK> installations = []
-
-javaTools=[
-            ['name':'jdk8', 'url':'file:/var/jenkins_home/downloads/jdk-8u181-linux-x64.tar.gz', 'subdir':'jdk1.8.0_181']
-          ]
 
 javaTools.each { javaTool ->
 

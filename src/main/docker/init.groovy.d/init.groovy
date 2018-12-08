@@ -8,15 +8,10 @@ import hudson.plugins.groovy.*
 import net.sf.json.JSONObject
 
 
-println("Setup number of executors")
-
-def instance = Jenkins.getInstance()
-instance.setNumExecutors(5)
-
 
 println("Creating the seed job")
 
-File jobScript = new File('/usr/share/jenkins/seed-job.groovy')
+File jobScript = new File('/etc/jenkins_jobs/seed-job.groovy')
 JobManagement jobManagement = new JenkinsJobManagement(System.out, [:], new File('.'))
 
 new DslScriptLoader(jobManagement).with { runScript(jobScript.text) }

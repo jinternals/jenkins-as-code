@@ -1,8 +1,8 @@
-version: '3.1'
+version: '3.3'
 
 services:
   jenkins:
-    image: jinternals/jenkins
+    image: jinternals/jenkins:1.0-SNAPSHOT
     container_name: jenkins
     hostname: jenkins
     ports:
@@ -10,19 +10,21 @@ services:
       - 50000:50000
     volumes:
       - ./data/jenkins_home/:/var/jenkins_home
-    secrets:
-      - artifactoryPassword
+      - ./data/tools/:/var/tools
+#    secrets:
+#      - artifactoryPassword
     networks:
       jenkins-network:
         ipv4_address: 10.8.0.2
 
-secrets:
-  artifactoryPassword:
-    file: ./config/jenkins/artifactoryPassword
+#secrets:
+#  artifactoryPassword:
+#    file: ./config/jenkins/artifactoryPassword
 
 networks:
   jenkins-network:
     driver: bridge
     ipam:
+      driver: default
       config:
-      - subnet: 10.8.0.0/16
+        - subnet: 10.8.0.0/16

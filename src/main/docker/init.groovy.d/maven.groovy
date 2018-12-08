@@ -7,11 +7,12 @@ import hudson.tools.ZipExtractionInstaller;
 import hudson.util.DescribableList
 import jenkins.model.Jenkins;
 
+mavenTool = ['name': 'maven3', 'url': 'file:/var/tools/apache-maven-3.5.4-bin.tar.gz', 'subdir': 'apache-maven-3.5.4']
+
 def extensions = Jenkins.instance.getExtensionList(Maven.DescriptorImpl.class)[0]
 
 List<MavenInstallation> installations = []
 
-mavenTool = ['name': 'maven3', 'url': 'file:/var/jenkins_home/downloads/apache-maven-3.5.4-bin.tar.gz', 'subdir': 'apache-maven-3.5.4']
 
 println("Setting up tool: ${mavenTool.name} ")
 
