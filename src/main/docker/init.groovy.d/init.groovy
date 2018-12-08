@@ -11,12 +11,7 @@ import net.sf.json.JSONObject
 
 println("Creating the seed job.")
 
-File 
-
-
-
-
-= new File('/etc/jenkins_jobs/seed-job.groovy')
+File = new File('/etc/jenkins_jobs/seed-job.groovy')
 JobManagement jobManagement = new JenkinsJobManagement(System.out, [:], new File('.'))
 
 new DslScriptLoader(jobManagement).with { runScript(jobScript.text) }
