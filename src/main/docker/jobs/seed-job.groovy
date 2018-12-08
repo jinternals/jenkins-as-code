@@ -13,6 +13,6 @@ job("seed-job") {
     }
 
     steps {
-        shell('jenkins-jobs --conf /etc/jenkins_jobs/jenkins_jobs.ini update --delete-old -r ./configuration')
+        shell('jenkins-jobs update --delete-old -r ./configuration')
     }
 }
