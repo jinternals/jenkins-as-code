@@ -1,6 +1,7 @@
 import jenkins.model.*
 
-println("Setup number of executors")
+def numExecutors = 5;
 
+println("Setting up ${numExecutors} executors.")
 def instance = Jenkins.getInstance()
-instance.setNumExecutors(5)
+instance.setNumExecutors(numExecutors)
