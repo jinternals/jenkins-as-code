@@ -9,7 +9,7 @@ import org.jenkinsci.plugins.workflow.libs.SCMSourceRetriever
 def instance = Jenkins.getInstance()
 
 /* Library configuration */
-pipeline_shared_libraries = [
+shared_libraries = [
         'jenkins-demo-shared-libraries': [
                 'defaultVersion': 'master',
                 'implicit': false,
@@ -22,22 +22,51 @@ pipeline_shared_libraries = [
         ]
 ]
 
-configure(instance, pipeline_shared_libraries)
+configure(instance, shared_libraries)
 
+private configure(instance, shared_libraries) {
 
-private ArrayList transformConfiguration(pipeline_shared_libraries) {
+    if (shared_libraries == null) {
+        shared_libraries = [:]
+    }
+
+    if (!shared_libraries in Map) {
+        throw new Exception("shared_libraries must be an instance of Map.")
+    }
+
+    shared_libraries = shared_libraries as JSONObject
+
+    List libraries = transformToLibraryConfiguration(shared_libraries)
+
+    def global_settings = instance.getExtensionList(GlobalLibraries.class)[0]
+
+    if (libraries && !isLibrariesEqual(global_settings.libraries, libraries)) {
+        global_settings.libraries = libraries
+        global_settings.save()
+        println 'Configured Pipeline Global Shared Libraries:\n ' + global_settings.libraries.collect {  it.name  }.join('\n')
+    } else {
+        if (shared_libraries) {
+            println 'Pipeline Global Shared Libraries already configured.'
+        } else {
+            println 'Skipped configuring Pipeline Global Shared Libraries because settings are empty.'
+        }
+    }
+}
+
+private ArrayList transformToLibraryConfiguration(shared_libraries) {
     List libraries = [] as ArrayList
 
-    pipeline_shared_libraries.each { name, config ->
+    shared_libraries.each { name, config ->
         if (isValidLibraryConfiguration(name, config)) {
-            def scm = new GitSCMSource(config['scm'].optString('remote'))
+
+            def gitScm = new GitSCMSource(config['scm'].optString('remote'))
 
             if (config['scm'].optString('credentialsId') != null) {
-                scm.credentialsId = config['scm'].optString('credentialsId')
+                gitScm.credentialsId = config['scm'].optString('credentialsId')
             }
-            scm.traits = [new BranchDiscoveryTrait()]
-            def retriever = new SCMSourceRetriever(scm)
-            def library = new LibraryConfiguration(name, retriever)
+
+            gitScm.traits = [new BranchDiscoveryTrait()]
+            def library = new LibraryConfiguration(name, new SCMSourceRetriever(gitScm))
             library.defaultVersion = config.optString('defaultVersion')
             library.implicit = config.optBoolean('implicit', false)
             library.allowVersionOverride = config.optBoolean('allowVersionOverride', true)
@@ -47,38 +76,6 @@ private ArrayList transformConfiguration(pipeline_shared_libraries) {
     }
 
     return libraries;
-}
-
-
-private configure(instance, pipeline_shared_libraries) {
-
-    if (pipeline_shared_libraries == null) {
-        pipeline_shared_libraries = [:]
-    }
-
-    if (!pipeline_shared_libraries in Map) {
-        throw new Exception("pipeline_shared_libraries must be an instance of Map but instead is instance of: ${pipeline_shared_libraries.getClass()}")
-    }
-
-    pipeline_shared_libraries = pipeline_shared_libraries as JSONObject
-
-    List libraries = transformConfiguration(pipeline_shared_libraries)
-
-    def global_settings = instance.getExtensionList(GlobalLibraries.class)[0]
-
-    if (libraries && !isLibrariesEqual(global_settings.libraries, libraries)) {
-        global_settings.libraries = libraries
-        global_settings.save()
-        println 'Configured Pipeline Global Shared Libraries:\n    ' + global_settings.libraries.collect {
-            it.name
-        }.join('\n    ')
-    } else {
-        if (pipeline_shared_libraries) {
-            println 'Nothing changed.  Pipeline Global Shared Libraries already configured.'
-        } else {
-            println 'Nothing changed.  Skipped configuring Pipeline Global Shared Libraries because settings are empty.'
-        }
-    }
 }
 
 /**

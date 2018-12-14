@@ -32,3 +32,9 @@ Jenkins.instance.pluginManager.plugins.each{
     println ("${plugin.getShortName()}:${plugin.getVersion()}")
 }
 ```
+
+#### Download and put following sdk in ./jenkins-as-code/data/tools/ dir:
+```
+    apache-maven-3.5.4-bin.tar.gz
+    jdk-8u181-linux-x64.tar.gz
+```
