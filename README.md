@@ -38,3 +38,9 @@ Jenkins.instance.pluginManager.plugins.each{
     apache-maven-3.5.4-bin.tar.gz
     jdk-8u181-linux-x64.tar.gz
 ```
+
+#### Run on kubernetes: 
+```
+    minikube start --vm-driver hyperkit --cpus 4 --memory 8192
+    
+```    
