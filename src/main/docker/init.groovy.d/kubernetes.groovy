@@ -12,6 +12,8 @@ kubernetesCloud.setSkipTlsVerify(false)
 kubernetesCloud.setJenkinsTunnel('jenkins-discovery.jenkins:50000')
 kubernetesCloud.setConnectTimeout(5)
 kubernetesCloud.setReadTimeout(15)
+kubernetesCloud.setMaxRequestsPerHostStr(32)
+kubernetesCloud.setWaitForPodSec(600)
 
 
 instance.clouds.replace(kubernetesCloud)
