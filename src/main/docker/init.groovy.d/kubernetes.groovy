@@ -14,7 +14,7 @@ kubernetesCloud.setConnectTimeout(5)
 kubernetesCloud.setReadTimeout(15)
 kubernetesCloud.setMaxRequestsPerHostStr(32)
 kubernetesCloud.setWaitForPodSec(600)
-
+kubernetesCloud.setContainerCapStr(10)
 
 instance.clouds.replace(kubernetesCloud)
 
