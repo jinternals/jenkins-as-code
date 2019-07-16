@@ -47,6 +47,8 @@ Jenkins.instance.pluginManager.plugins.each{
     kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/deployment.yml
     kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/service.yml
     kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/ingress.yml
+    
+    kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:jenkins
 
 
 
