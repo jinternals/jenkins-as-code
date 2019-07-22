@@ -8,6 +8,7 @@ import hudson.util.Secret
 import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey
 import com.cloudbees.plugins.credentials.impl.CertificateCredentialsImpl
 import com.cloudbees.plugins.credentials.SecretBytes
+import org.yaml.snakeyaml.Yaml
 
 def domain = Domain.global()
 def store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0].getStore()
