@@ -21,3 +21,8 @@ def githubAccount = new UsernamePasswordCredentialsImpl(
         config.github.username, config.github.password)
         
 store.addCredentials(domain, githubAccount)
+
+def dockerhub = new UsernamePasswordCredentialsImpl(
+        CredentialsScope.GLOBAL,config.dockerhub.id, config.dockerhub.description,
+        config.dockerhub.username, config.dockerhub.password)
+store.addCredentials(domain, dockerhub)
