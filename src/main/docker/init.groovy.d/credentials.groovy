@@ -16,14 +16,9 @@ def store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials
 Yaml parser = new Yaml()
 def config = parser.load(("/etc/jenkins-secret-volume/config.yaml" as File).text)
 
-def githubAccount = new UsernamePasswordCredentialsImpl(
-        CredentialsScope.GLOBAL,config.github.id, config.github.description,
-        config.github.username, config.github.password)
-        
-store.addCredentials(domain, githubAccount)
-
-def dockerhub = new UsernamePasswordCredentialsImpl(
-        CredentialsScope.GLOBAL,config.dockerhub.id, config.dockerhub.description,
-        config.dockerhub.username, config.dockerhub.password)
-
-store.addCredentials(domain, dockerhub)
+config.credentials.each 
+{ credential ->
+      def githubAccount = new UsernamePasswordCredentialsImpl(
+      CredentialsScope.GLOBAL, credential.id, credential.description, credential.username, credential.password)
+      store.addCredentials(domain, githubAccount)
+};
