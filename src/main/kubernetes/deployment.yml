@@ -24,7 +24,6 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
-             volumeMounts:
             # name must match the volume name below
             - name: jenkins-secret-volume
               mountPath: /etc/jenkins-secret-volume
