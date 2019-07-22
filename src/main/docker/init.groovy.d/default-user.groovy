@@ -1,13 +1,14 @@
 import jenkins.model.*
 import hudson.security.HudsonPrivateSecurityRealm
 import hudson.security.GlobalMatrixAuthorizationStrategy
+import org.yaml.snakeyaml.Yaml
 
 def env = System.getenv()
 
-
-config = readYaml (file: '/etc/jenkins-secret-volume/config.yml')
-
+Yaml parser = new Yaml()
+def config = parser.load(("/etc/jenkins-secret-volume/config.yaml" as File).text)
 def jenkins = Jenkins.getInstance()
+
 jenkins.setSecurityRealm(new HudsonPrivateSecurityRealm(false))
 jenkins.setAuthorizationStrategy(new GlobalMatrixAuthorizationStrategy())
 
