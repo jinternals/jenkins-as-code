@@ -9,7 +9,7 @@
     definition {
         cps {
             def jobDslScript = new File('/etc/jenkins_jobs/seedDsl.groovy')
-            script(jobDslScript.txt)
+            script(jobDslScript.text)
             sandbox()
         }
     }
