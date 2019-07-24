@@ -1,7 +1,16 @@
-@Library("jenkins-demo-shared-libraries") _
+  pipelineJob('seed-job') {
+    
+    triggers {
+        scm('H/5 * * * *')
+    }
 
-seedPipeline(
-        gitBranch: "master",
-        gitCredentialId: "github",
-        gitRepository: "https://github.com/jinternals/jenkins-jobs-configuration.git"
-)
+    description("Seed Job")
+
+    definition {
+        cps {
+            def jobDslScript = new File('/etc/jenkins_jobs/seedDsl.groovy')
+            script(jobDslScript.txt)
+            sandbox()
+        }
+    }
+}
