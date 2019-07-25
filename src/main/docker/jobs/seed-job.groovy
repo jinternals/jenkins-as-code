@@ -1,7 +1,7 @@
   pipelineJob('seed-job') {
     
     triggers {
-        scm('H/5 * * * *')
+        githubPush()
     }
 
     description("Seed Job")
