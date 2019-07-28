@@ -33,24 +33,15 @@ Jenkins.instance.pluginManager.plugins.each{
 }
 ```
 
-#### Download and put following sdk in ./jenkins-as-code/data/tools/ dir:
-```
-    apache-maven-3.5.4-bin.tar.gz
-    jdk-8u181-linux-x64.tar.gz
-```
-
 #### Run on kubernetes: 
 ```
-    minikube start --vm-driver hyperkit --cpus 4 --memory 8192
-    
-    kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/namespace.yml
-    kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/deployment.yml
-    kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/service.yml
-    kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/ingress.yml
-    
-    kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:jenkins
+minikube start --vm-driver hyperkit --cpus 4 --memory 8192
 
+kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/namespace.yml
+kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/deployment.yml
+kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/service.yml
+kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/ingress.yml
 
-
+kubectl create clusterrolebinding permissive-binding --clusterrole=cluster-admin --user=admin --user=kubelet --group=system:serviceaccounts:jenkins
     
 ```    
