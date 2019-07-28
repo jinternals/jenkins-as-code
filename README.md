@@ -38,7 +38,7 @@ Jenkins.instance.pluginManager.plugins.each{
 minikube start --vm-driver hyperkit --cpus 4 --memory 8192
 
 kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/namespace.yml
-kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/jenkins-job-builder-secret.yaml
+kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/jenkins-secret.yaml
 kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/jenkins-job-builder-secret.yaml
 kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/deployment.yml
 kubectl apply -f https://raw.githubusercontent.com/jinternals/jenkins-as-code/master/src/main/kubernetes/service.yml
