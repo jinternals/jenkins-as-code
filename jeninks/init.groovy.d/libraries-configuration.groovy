@@ -5,22 +5,33 @@ import net.sf.json.JSONObject
 import org.jenkinsci.plugins.workflow.libs.GlobalLibraries
 import org.jenkinsci.plugins.workflow.libs.LibraryConfiguration
 import org.jenkinsci.plugins.workflow.libs.SCMSourceRetriever
+import org.yaml.snakeyaml.Yaml
+
+
+def env = System.getenv()
+
+if(env.LIBRARIES_CONFIG_FILE_PATH == null){
+    return;
+}
 
 def instance = Jenkins.getInstance()
+def parser = new Yaml()
+def config = parser.load(("${env.LIBRARIES_CONFIG_FILE_PATH}" as File).text)
 
 /* Library configuration */
-shared_libraries = [
-        'jenkins-demo-shared-libraries': [
-                'defaultVersion': 'master',
-                'implicit': false,
-                'allowVersionOverride': true,
-                'includeInChangesets': false,
-                'scm': [
-                        'remote': 'https://github.com/jinternals/jenkins-demo-shared-libraries.git'
-                        //'credentialsId': 'your-credentials-id'
-                ]
-        ]
-]
+def shared_libraries = new HashMap<String,HashMap>();
+
+config.jenkins.shared_libraries.each{ library ->
+    shared_libraries.put(library.name,[
+            'defaultVersion': library.defaultVersion,
+            'implicit': library.implicit,
+            'allowVersionOverride': library.allowVersionOverride,
+            'includeInChangesets': library.includeInChangesets,
+            'scm': [
+                    'remote': library.gitRepository,
+                    'credentialsId': library.gitCredentialsId
+            ]])
+}
 
 configure(instance, shared_libraries)
 

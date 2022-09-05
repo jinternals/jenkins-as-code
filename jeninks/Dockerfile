@@ -8,8 +8,7 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false \
 
 # Install plugins
 COPY plugins/plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
+RUN cat /usr/share/jenkins/plugins.txt | /usr/local/bin/install-plugins.sh
 
 COPY jenkins-job-builder/jenkins_jobs.ini /etc/jenkins_jobs/jenkins_jobs.ini
 COPY jobs/* /etc/jenkins_jobs/
