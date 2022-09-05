@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.176.2
+FROM jenkins4eval/jenkins:latest
 
 # Let's assume that we don't want to have the setup wizard
 # Nor do we want to reject any parameters passed between jobs
